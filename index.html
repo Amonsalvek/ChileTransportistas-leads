@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceso a Leads - ChileTransportistas</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="icon" href="https://cdn.chiletransportistas.com/ChileTransportistas-assets/favicon-chiletransportistas.ico">
+</head>
+<body>
+
+<div id="app">
+
+    <!-- ===============================
+         LOGIN
+     =============================== -->
+
+    <div id="login-topbar" class="login-topbar">
+        <a href="https://www.chiletransportistas.com/" target="_blank">
+            <img src="https://cdn.chiletransportistas.com/ChileTransportistas-assets/logo-chiletransportistas.webp" alt="ChileTransportistas" width="40" height="40">
+            <h2>ChileTransportistas</h2>
+        </a>
+    </div>
+    <div id="login-hero-container" class="login-hero-container">
+        <div class="left-container-hero">
+            <h1>Crece tu Negocio de Transporte de Carga</h1>
+            <div>
+                <ion-icon name="people-outline"></ion-icon>
+                <p>Contacta gente buscando carga en Chile todos los días.</p>
+            </div>
+            <div>
+                <ion-icon name="cube-outline"></ion-icon>
+                <p>Carga para todo tipo de camiones, ordenado por categorías.</p>
+            </div>
+            <div>
+                <ion-icon name="call-outline"></ion-icon>
+                <p>Obtén números y celulares de empresas y personas que buscan mover carga.</p>
+            </div>
+            <div>
+                <ion-icon name="rocket-outline"></ion-icon>
+                <p>Cientos de leads disponibles para ti.</p>
+            </div>
+        </div>
+        <div class="right-container-hero">
+            <div id="login-view" class="view active">
+                <div id="login-card" class="card login-card">
+                    <h1>
+                        <ion-icon name="lock-closed"></ion-icon>
+                        Acceder a Leads-ChileTransportistas
+                    </h1>
+
+                    <div id="email-login" class="email-login">
+                        <label>Email</label>
+                        <input type="email" id="login-email" placeholder="tu@email.com">
+
+                        <button id="btn-login" class="btn-login">
+                            <span>Ingresar</span>
+                            <div id="spinner" class="spinner" style="display: none;"></div>
+                        </button>
+                        <p>No requiere tarjeta de crédito.</p>
+                        <p id="login-error" class="error"></p>
+                    </div>
+
+                    <!-- Caja de registro -->
+                    <div id="register-box" class="register-box hidden">
+                        <h3>Crear nueva cuenta</h3>
+
+                        <div class="register-box-content">
+                            <input type="text" id="reg-nombre" placeholder="Nombre">
+                            <input type="text" id="reg-apellido" placeholder="Apellido">
+                            <input type="email" id="email-register" placeholder="tu@email.com">
+
+                            <div class="optin-box">
+                                <label>
+                                    <input type="checkbox" id="optin" checked>
+                                    Suscribirme al Newsletter con noticias del transporte.
+                                </label>
+                            </div>
+
+                            <button id="btn-registrar" class="btn-registrar">
+                                <span>Registrarme</span>
+                                <div id="spinner-registrar" class="spinner" style="display: none;"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================
+         VALIDACIÓN DE CÓDIGO
+     =============================== -->
+    <div id="validacion-view" class="view">
+        <div class="card">
+            <h2>Validar correo</h2>
+            <p>Te enviamos un código a:</p>
+            <h3 id="email-validacion"></h3>
+
+            <input type="text" id="input-codigo" placeholder="Código de 6 dígitos">
+
+            <button id="btn-validar-codigo" class="primary">Validar</button>
+
+            <p id="validacion-error" class="error"></p>
+        </div>
+    </div>
+
+    <!-- ===============================
+         DASHBOARD
+     =============================== -->
+    <div id="dashboard-view" class="view">
+        <header class="topbar">
+            <div class="topbar-content">
+                <div class="left">
+                    <a href="https://www.chiletransportistas.com/" target="_blank">
+                        <img src="https://cdn.chiletransportistas.com/ChileTransportistas-assets/logo-chiletransportistas.webp" width="50" height="50">
+                        <h2>Leads - ChileTransportistas</h2>
+                    </a>
+                </div>
+                <div class="right">
+                    <span id="user-email"></span>
+                    <button id="logout">Cerrar sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+
+            <h2>
+                <ion-icon name="mail-unread-outline" style="vertical-align:middle; font-size:1.2em;"></ion-icon>
+                Leads disponibles
+            </h2>
+            <p class="caption">Reclama los leads disponibles aquí.</p>
+
+            <table id="tabla-disponibles">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Mensaje</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Categoría</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="spinner-disponibles" class="tabla-spinner">
+                <div class="spinner"></div>
+            </div>
+
+            <h2 style="margin-top:50px;">
+                <ion-icon name="cube-outline" style="vertical-align:middle; font-size:1.2em;"></ion-icon>
+                Tus leads reclamados
+            </h2>
+
+            <table id="tabla-reclamados">
+                <thead>
+                    <tr>
+                        <th>Fecha Reclamo</th>
+                        <th>Mensaje</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Categoría</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <p id="mensaje-leads-no-reclamados" class="hidden">Aún no haz reclamado tu primer lead.</p>
+            <div id="spinner-reclamados" class="tabla-spinner">
+                <div class="spinner"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===============================
+         VISTA DETALLE LEAD
+     =============================== -->
+    <div id="lead-view" class="view">
+        <div class="card lead-card">
+
+            <button class="back" id="volver-dashboard">
+                <ion-icon name="arrow-back-outline" style="vertical-align:middle; font-size:1.2em;"></ion-icon> Volver
+            </button>
+
+            <h2 id="lead-title"></h2>
+
+            <p><b>Fecha requerimiento:</b> <span id="lead-fecha"></span></p>
+            <p><b>Mensaje:</b> <span id="lead-mensaje"></span></p>
+            <p><b>Origen:</b> <span id="lead-origen"></span></p>
+            <p><b>Destino:</b> <span id="lead-destino"></span></p>
+            <p><b>Categoría:</b> <span id="lead-categoria"></span></p>
+
+            <div id="contacto-box" class="hidden">
+                <h3><ion-icon name="call-outline" style="vertical-align:middle; font-size:1.2em;"></ion-icon> Datos de contacto</h3>
+                <p><b>Nombre:</b> <span id="lead-nombre"></span></p>
+                <p><b>Email:</b> <span id="lead-email"></span></p>
+                <p><b>Celular:</b> <span id="lead-tel"></span></p>
+            </div>
+
+            <button id="btn-reclamar" class="btn-reclamar">
+                <span>Ver información de contacto</span>
+                <div id="spinner-reclamar" class="spinner" style="display: none;"></div>
+            </button>
+            <p id="reclamar-info">Reclama el lead para ver la información de contacto.</p>
+
+            <p id="reclamo-msg" class="success hidden">
+                Lead reclamado con éxito 🎉 Contáctalo pronto.
+            </p
+            </p>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
