@@ -1,0 +1,620 @@
+/* Import Exo and Quicksand fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@400;700&family=Quicksand:wght@400;700&display=swap');
+
+/* ===============================
+   BASE STYLES
+=============================== */
+body {
+    margin: 0;
+    background: #0B1215;
+    color: #eee;
+    font-family: Quicksand, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: Exo;
+}
+
+/* ===============================
+   UTILITY CLASSES
+=============================== */
+.hidden {
+    display: none !important;
+}
+
+.error { 
+    color: #ff5c5c; 
+}
+
+.success { 
+    color: #62ff9d; 
+}
+
+/* ===============================
+   VIEW SYSTEM
+=============================== */
+.view {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.view.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* ===============================
+   CARDS
+=============================== */
+.card {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+}
+
+.card h1 { 
+    text-align: center; 
+}
+
+.lead-card {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* ===============================
+   FORM ELEMENTS
+=============================== */
+input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #d50032;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    transition: opacity 0.18s, transform 0.16s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background: #d50032;
+    opacity: 0.8;
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background: #333;
+    cursor: not-allowed;
+    transform: translateY(0);
+}
+
+button.btn-login, 
+button.btn-registrar, 
+button.btn-reclamar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===============================
+   SPINNERS
+=============================== */
+.spinner {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 3px solid #ddd;
+    border-top-color: #d50032;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 
+    to { transform: rotate(360deg);} 
+}
+
+.tabla-spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.tabla-spinner .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 4px;
+}
+
+/* ===============================
+   LOGIN PAGE
+=============================== */
+.login-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    background-color: #0B1215;
+}
+
+.login-topbar a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-topbar a:visited {
+    color: #fff;
+}
+
+.login-topbar h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: Exo, Arial, Helvetica, sans-serif;
+}
+
+.login-hero-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0B1215;
+}
+
+.left-container-hero, 
+.right-container-hero {
+    width: 50%;
+    max-width: 600px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .left-container-hero, 
+    .right-container-hero {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+.left-container-hero {
+    padding: 0 100px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .left-container-hero {
+        padding: 30px 20px 40px 20px !important;
+        align-items: flex-start !important;
+    }
+}
+
+.left-container-hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #fff;
+}
+
+.left-container-hero p, 
+.left-container-hero ion-icon {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+}
+
+.left-container-hero p {
+    margin: 0 0 0 8px;   /* space so wrapped lines start after the icon */
+}
+
+.left-container-hero ion-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0; /* prevents icon from shrinking */
+}
+
+.left-container-hero div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 1.5rem;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+.right-container-hero-background {
+    position: absolute;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.email-login, 
+.register-box-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.optin-box { 
+    font-size: 14px; 
+}
+
+/* ===============================
+   DASHBOARD
+=============================== */
+.topbar {
+    width: 100%;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 100px;
+    gap: 10px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.left a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.left a:visited {
+    color: #fff;
+}
+
+.left h2 { 
+    margin-left: 12px; 
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.content {
+    margin-top: 100px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* ===============================
+   TABLES
+=============================== */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgb(35, 32, 32);
+}
+
+table th {
+    border-top: 1px solid rgb(35, 32, 32);
+    text-align: left;
+}
+
+table tr:hover {
+    background-color: #333;
+    transition: background 0.18s;
+}
+
+table th, 
+table td {
+    padding: 10px;
+    border-bottom: 1px solid rgb(35, 32, 32);
+}
+
+table th:first-child {
+    border-top-left-radius: 6px;
+}
+
+table th:last-child {
+    border-top-right-radius: 6px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 6px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 6px;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+=============================== */
+
+/* TABLET AND BELOW */
+@media (max-width: 900px) {
+    .topbar-content {
+        padding: 10px 20px;
+    }
+    
+    .content {
+        max-width: 100%;
+    }
+    
+    .left-container-hero {
+        padding: 0 40px;
+    }
+    
+    .left-container-hero h1 {
+        font-size: 3rem;
+    }
+}
+
+/* HERO MOBILE LAYOUT */
+@media (max-width: 768px) {
+    
+    /* FORCE the hero container layout */
+    #login-hero-container,
+    .login-hero-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        padding: 0 !important;
+        min-height: 100vh !important;
+    }
+
+    /* RIGHT CONTAINER (LOGIN CARD) FIRST - AT TOP */
+    #login-hero-container .right-container-hero,
+    .login-hero-container .right-container-hero,
+    .right-container-hero {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 80px 15px 30px 15px !important;
+        order: -1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-sizing: border-box !important;
+    }
+
+    /* LEFT CONTAINER (HERO TEXT) SECOND - BELOW */
+    #login-hero-container .left-container-hero,
+    .login-hero-container .left-container-hero,
+    .left-container-hero {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 30px 20px 40px 20px !important;
+        order: 1 !important;
+        align-items: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Make login view full width */
+    #login-view,
+    #login-view.view,
+    #login-view.view.active {
+        width: 100% !important;
+        display: flex !important;
+        align-items: stretch !important;
+    }
+    
+    /* Make login card almost full width */
+    #login-card,
+    .login-card,
+    #login-view .card,
+    .card.login-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 25px 20px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .email-login, 
+    .register-box-content {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .left {
+        display: none !important;
+    }
+    
+    .topbar-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 10px 20px;
+    }
+    
+    .content {
+        margin-top: 120px;
+        padding: 15px;
+    }
+    
+    .card {
+        padding: 20px;
+        width: 95%;
+        max-width: none;
+    }
+    
+    .card h1 {
+        font-size: 1.3rem;
+    }
+    
+    .login-card h1 {
+        font-size: 1.2rem !important;
+    }
+    
+    .left-container-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .left-container-hero p, 
+    .left-container-hero ion-icon {
+        font-size: 1rem;
+    }
+    
+    .left-container-hero ion-icon {
+        font-size: 1.3rem;
+    }
+    
+    /* Make tables scrollable on mobile */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table thead, 
+    table tbody, 
+    table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    table th, 
+    table td {
+        font-size: 12px;
+        padding: 8px 6px;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+    .login-topbar {
+        padding: 8px;
+    }
+    
+    .login-topbar h2 {
+        font-size: 0.95rem;
+    }
+    
+    .login-topbar img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .login-hero-container {
+        padding: 0 !important;
+    }
+    
+    /* RIGHT CONTAINER - LOGIN CARD */
+    .right-container-hero {
+        padding: 70px 10px 25px 10px !important;
+    }
+    
+    /* LEFT CONTAINER - HERO TEXT */
+    .left-container-hero {
+        padding: 25px 15px 35px 15px !important;
+    }
+    
+    .left-container-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .left-container-hero p, 
+    .left-container-hero ion-icon {
+        font-size: 0.85rem;
+    }
+    
+    .left-container-hero ion-icon {
+        font-size: 1.1rem;
+    }
+    
+    .login-card {
+        padding: 20px 15px !important;
+    }
+    
+    .login-card h1 {
+        font-size: 1.1rem !important;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+    
+    .card h1 {
+        font-size: 1.3rem;
+    }
+    
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    input {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    table th, 
+    table td {
+        font-size: 11px;
+        padding: 6px 4px;
+    }
+    
+    .content {
+        margin-top: 140px;
+    }
+}
