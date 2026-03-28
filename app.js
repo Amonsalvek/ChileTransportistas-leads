@@ -1171,6 +1171,12 @@ function listenForegroundMessages() {
   });
 }
 
+function shouldShowNotifModal() {
+  const dismissedUntil = localStorage.getItem(NOTIF_DISMISSED_KEY);
+  if (dismissedUntil && Date.now() < parseInt(dismissedUntil)) return false;
+  return true;
+}
+
 // ── Flujo principal: pedir permiso → obtener token → escuchar ──
 async function initPushNotifications() {
   await registerSW();
