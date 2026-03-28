@@ -1158,15 +1158,10 @@ function listenForegroundMessages() {
     const title = payload.notification?.title || '🚛 Nuevo lead';
     const body  = payload.notification?.body  || '';
 
-    // Enviar mensaje al SW para que muestre la notificación
-    const reg = await navigator.serviceWorker.getRegistration();
-    if (reg && reg.active) {
-      reg.active.postMessage({
-        type: 'SHOW_NOTIFICATION',
-        title,
-        body,
-        url: payload.data?.url || 'https://chiletransportistas.com'
-      });
+    // Usar new Notification() directamente — confirmamos que el permiso está granted
+    if (Notification.permission === 'granted') {
+      new Notification(title, { body });
+      console.log('[FCM] Notification() disparada');
     }
 
     loadLeads();
