@@ -1158,18 +1158,15 @@ function listenForegroundMessages() {
     const title = payload.notification?.title || '🚛 Nuevo lead';
     const body  = payload.notification?.body  || '';
 
-    try {
-      const reg = await navigator.serviceWorker.getRegistration();
-      console.log('[FCM] SW reg:', reg?.scope);
-      if (reg) {
-        await reg.showNotification(title, { body });
-        console.log('[FCM] notificación mostrada');
-      } else {
-        console.warn('[FCM] sin SW, usando Notification()');
-        new Notification(title, { body });
-      }
-    } catch(e) {
-      console.error('[FCM] error mostrando notificación:', e);
+    // Enviar mensaje al SW para que muestre la notificación
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg && reg.active) {
+      reg.active.postMessage({
+        type: 'SHOW_NOTIFICATION',
+        title,
+        body,
+        url: payload.data?.url || 'https://chiletransportistas.com'
+      });
     }
 
     loadLeads();

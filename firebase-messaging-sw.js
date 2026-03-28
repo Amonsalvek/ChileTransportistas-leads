@@ -35,3 +35,13 @@ self.addEventListener('notificationclick', (event) => {
     })
   );
 });
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SHOW_NOTIFICATION') {
+    const { title, body, url } = event.data;
+    self.registration.showNotification(title, {
+      body,
+      data: { url }
+    });
+  }
+});
