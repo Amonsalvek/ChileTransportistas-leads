@@ -1150,22 +1150,18 @@ async function getFCMToken() {
 // ── Notificación cuando la pestaña está ABIERTA ──
 function listenForegroundMessages() {
   const messaging = firebase.messaging();
-  messaging.onMessage((payload) => {
+  messaging.onMessage(async (payload) => {
     console.log('[FCM] mensaje foreground:', payload);
     const title = payload.notification?.title || '🚛 Nuevo lead';
     const body  = payload.notification?.body  || '';
-    
-    navigator.serviceWorker.getRegistration().then(reg => {
-      if (reg) {
-        reg.showNotification(title, {
-          body,
-          // icon: '/logo.png',
-          data: { url: payload.data?.url || 'https://chiletransportistas.com' }
-        });
-      } else {
-        new Notification(title, { body });
-      }
-    });
+
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (reg) {
+      reg.showNotification(title, {
+        body,
+        data: { url: payload.data?.url || 'https://chiletransportistas.com' }
+      });
+    }
 
     loadLeads();
   });
