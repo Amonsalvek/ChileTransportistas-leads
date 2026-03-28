@@ -1133,9 +1133,12 @@ async function getFCMToken() {
       vapidKey: 'BHLpMih9k_BpPPqGaGCiqa_-BbA4_QMiGO4yM5dvU5aB5doEajyUzszznSGKmWirfRBA3julzRYgaxoW7DtUn3s',
       serviceWorkerRegistration: await navigator.serviceWorker.getRegistration()
     });
+
     if (token) {
       console.log('[FCM] token obtenido:', token.substring(0, 20) + '...');
-      await api({ action: 'saveFcmToken', email: CURRENT_USER, token });
+      console.log('[FCM] guardando token para:', CURRENT_USER);
+      const res = await api({ action: 'saveFcmToken', email: CURRENT_USER, token });
+      console.log('[FCM] token guardado:', res);
       return token;
     } else {
       console.warn('[FCM] no se obtuvo token');
