@@ -1117,7 +1117,6 @@ async function registerSW() {
   }
   try {
     const reg = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-    console.log('[SW] registrado:', reg.scope);
     return reg;
   } catch (e) {
     console.error('[SW] error al registrar:', e);
@@ -1135,10 +1134,7 @@ async function getFCMToken() {
     });
 
     if (token) {
-      console.log('[FCM] token obtenido:', token.substring(0, 20) + '...');
-      console.log('[FCM] guardando token para:', CURRENT_USER);
       const res = await api({ action: 'saveFcmToken', email: CURRENT_USER, token });
-      console.log('[FCM] token guardado:', res);
       return token;
     } else {
       console.warn('[FCM] no se obtuvo token');
@@ -1154,14 +1150,12 @@ async function getFCMToken() {
 function listenForegroundMessages() {
   const messaging = firebase.messaging();
   messaging.onMessage(async (payload) => {
-    console.log('[FCM] mensaje foreground:', payload);
     const title = payload.notification?.title || '🚛 Nuevo lead';
     const body  = payload.notification?.body  || '';
 
     // Usar new Notification() directamente — confirmamos que el permiso está granted
     if (Notification.permission === 'granted') {
       new Notification(title, { body });
-      console.log('[FCM] Notification() disparada');
     }
 
     loadLeads();
